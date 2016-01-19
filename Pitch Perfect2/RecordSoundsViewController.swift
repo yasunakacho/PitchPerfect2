@@ -14,7 +14,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var recordingInProgress: UILabel!
     @IBOutlet weak var stopButton: UIButton!
-    
+
     var audioRecorder:AVAudioRecorder!
     var recordedAudio:RecordedAudio!
     
@@ -29,12 +29,16 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        recordButton.enabled = true
         stopButton.hidden = true
+        recordingInProgress.text = "Tap to Record"
+        recordingInProgress.hidden = false
     }
 
     @IBAction func recordAudio(sender: UIButton) {
         recordButton.enabled = false
         stopButton.hidden = false
+        recordingInProgress.text = "Record in Progress"
         recordingInProgress.hidden = false
         //TODO: Record the user's voice
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
@@ -61,7 +65,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if(flag){
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
             //TODO: Step 2 - Move to the next scene aka perform sugue
-            self.performSegueWithIdentifier("stopRecording", sender: recordedAudio)
+            self.performSegueWithIdentifier( "stopRecording", sender: recordedAudio)
         }else{
             print("Recording was not successful")
             recordButton.enabled = true
