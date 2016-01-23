@@ -65,7 +65,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if(flag){
             recordedAudio = RecordedAudio(filePathUrl: recorder.url, title: recorder.url.lastPathComponent!)
             //TODO: Step 2 - Move to the next scene aka perform sugue
-            self.performSegueWithIdentifier( "stopRecording", sender: recordedAudio)
+            performSegueWithIdentifier( "stopRecording", sender: recordedAudio)
         }else{
             print("Recording was not successful")
             recordButton.enabled = true
